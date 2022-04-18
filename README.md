@@ -7,6 +7,7 @@
 - Spring Data JPA
 - Hibernate
 - Postgresql
+- Swagger
 - Docker
 - Junit
 - Mockito

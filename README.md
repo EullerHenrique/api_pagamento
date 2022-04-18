@@ -4,10 +4,13 @@
 
 - Java
 - Spring Boot
-- Spring Data JPA
+- JPA
 - Hibernate
 - Postgresql
+- Lonbok
 - Swagger
+- ModelMapper
+- Gson
 - Docker
 - Junit
 - Mockito

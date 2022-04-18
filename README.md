@@ -37,7 +37,7 @@
    "cartao": "4444********1234",
    "descricao": {
       "valor": "500.50",
-      "dataHora": "01/05/2021 18",
+      "dataHora": "01/05/2021 18:00:00",
       "estabelecimento": "PetShop Mundo cão"
     },
     "formaPagamento":{
@@ -55,7 +55,7 @@
     "cartao": "4444********1234",
     "descricao": {
         "valor": "500.50",
-        "dataHora": "01/05/2021 18",
+        "dataHora": "01/05/2021 18:00:00",
         "estabelecimento": "PetShop Mundo cão",
         "nsu": "1234567890",
         "codigoAutorizacao": "147258369",
@@ -68,9 +68,89 @@
   }
   ```
   
+  ### localhost:8080/transacao/v1/estorno/1
   
-  - localhost:8080/transacao/v1/estorno/1
+  Response: 
   
-  - localhost:8080/transacao/v1/1
+  ```
+  {
+    "id": 1,
+    "cartao": "4444********1234",
+    "descricao": {
+        "valor": "500.50",
+        "dataHora": "01/05/2021 18:00:00",
+        "estabelecimento": "PetShop Mundo cão",
+        "nsu": "1234567890",
+        "codigoAutorizacao": "147258369",
+        "status": "NEGADO"
+    },
+    "formaPagamento": {
+        "tipo": "AVISTA",
+        "parcelas": "1"
+    }
+  }
+  ```
   
-  - localhost:8080/transacao/v1
+  ### localhost:8080/transacao/v1/1
+  
+  Response:
+  
+  ```
+  {
+    "id": 1,
+    "cartao": "4444********1234",
+    "descricao": {
+        "valor": "500.50",
+        "dataHora": "01/05/2021 18:00:00",
+        "estabelecimento": "PetShop Mundo cão",
+        "nsu": "1234567890",
+        "codigoAutorizacao": "147258369",
+        "status": "NEGADO"
+    },
+    "formaPagamento": {
+        "tipo": "AVISTA",
+        "parcelas": "1"
+    }
+  }
+  ```
+  
+  ### localhost:8080/transacao/v1
+  
+  Response:
+  
+  ```
+  [
+    {
+        "id": 1,
+        "cartao": "4444********1234",
+        "descricao": {
+            "valor": "500.50",
+            "dataHora": "01/05/2021 18",
+            "estabelecimento": "PetShop Mundo cão",
+            "nsu": "1234567890",
+            "codigoAutorizacao": "147258369",
+            "status": "NEGADO"
+        },
+        "formaPagamento": {
+            "tipo": "AVISTA",
+            "parcelas": "1"
+        }
+    },
+    {
+        "id": 2,
+        "cartao": "4444********1234",
+        "descricao": {
+            "valor": "500.50",
+            "dataHora": "01/05/2021 18",
+            "estabelecimento": "PetShop Mundo cão",
+            "nsu": "1234567890",
+            "codigoAutorizacao": "147258369",
+            "status": "AUTORIZADO"
+        },
+        "formaPagamento": {
+            "tipo": "AVISTA",
+            "parcelas": "1"
+        }
+    }
+  ]
+  ```

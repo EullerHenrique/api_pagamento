@@ -27,8 +27,7 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -299,7 +298,7 @@ public class TransacaoControllerTest {
         //content: Define que o conteúdo é o Json de transacaoDTO
         //andExpect: Espera-se que o post retorne o status Ok
 
-        mockMvc.perform(get("/transacao/v1/estorno/1")
+        mockMvc.perform(put("/transacao/v1/estorno/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(Math.toIntExact(transacaoDTO.getId()))))

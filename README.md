@@ -15,6 +15,7 @@
 - Junit
 - Mockito
 - Hamcrest
+- MockMVC
 
 ## Execução da API
 

@@ -7,7 +7,7 @@
 - JPA
 - Hibernate
 - Postgresql
-- Lonbok
+- Lombok
 - Swagger
 - ModelMapper
 - Gson

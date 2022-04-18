@@ -88,7 +88,6 @@ public class FormaPagamento implements Serializable {
 
     //@SequenceGenerator: https://stackoverflow.com/questions/54866321/hibernate-sequence-for-each-enitity-or-table
 
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO, generator = "seq_forma_pagamento")
     @SequenceGenerator(name = "seq_forma_pagamento", sequenceName = "seq_forma_pagamento", allocationSize=1)

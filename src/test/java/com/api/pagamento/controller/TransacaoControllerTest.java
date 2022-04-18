@@ -178,7 +178,7 @@ public class TransacaoControllerTest {
 
     // Quando o nsu, codigo_pagamento ou o status é informado ao chamar o pagamento, uma exceção deve ser retornada
     @Test
-    void whenPaymentInformedNsuCodPagStatusInformedThenThenAnExceptionIsReturned() throws Exception {
+    void whenPaymentInformedIdsNsuCodPagStatusInformedThenThenAnExceptionIsReturned() throws Exception {
 
         // Dado
 
@@ -196,10 +196,9 @@ public class TransacaoControllerTest {
 
         //transacao for inválida
 
-        transacao.getDescricao().setNsu("1234567890");
-        transacao.getDescricao().setCodigoAutorizacao("147258369");
-        transacao.getDescricao().setStatus(StatusEnum.AUTORIZADO);
-
+        //transacaoService.pagar(transacao) -> InsercaoNaoPermitidaException()
+        when(transacaoService.pagar(transacao))
+                .thenThrow(InsercaoNaoPermitidaException.class);
 
         // Então
 

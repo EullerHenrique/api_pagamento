@@ -87,7 +87,6 @@ public class Descricao implements Serializable {
 
     //@SequenceGenerator: https://stackoverflow.com/questions/54866321/hibernate-sequence-for-each-enitity-or-table
 
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "seq_descricao")
     @SequenceGenerator(name = "seq_descricao", sequenceName = "seq_descricao", allocationSize=1)

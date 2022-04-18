@@ -45,7 +45,7 @@ public class TransacaoDTO {
 
     private Long id;
     private String cartao;
-    private Descricao descricao;
-    private FormaPagamento formaPagamento;
+    private DescricaoDTO descricao;
+    private FormaPagamentoDTO formaPagamento;
 
 }

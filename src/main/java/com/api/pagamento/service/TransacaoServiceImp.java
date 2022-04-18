@@ -6,6 +6,7 @@ import com.api.pagamento.domain.enumeration.StatusEnum;
 import com.api.pagamento.domain.exception.InsercaoNaoPermitidaException;
 import com.api.pagamento.domain.exception.TransacaoInexistenteException;
 import com.api.pagamento.domain.model.Transacao;
+import com.api.pagamento.repository.DescricaoRepository;
 import com.api.pagamento.repository.TransacaoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,8 @@ public class TransacaoServiceImp implements TransacaoService {
 
     private final TransacaoRepository transacaoRepository;
 
+    private final DescricaoRepository descricaoRepository;
+
     @Override
     public TransacaoDTO procurarPeloId(Long id) throws TransacaoInexistenteException {
         TransacaoDTO transacaoDTO = (TransacaoDTO) transacaoRepository.findById(id).map(t -> Mapper.convert(t, TransacaoDTO.class)).orElse(null);
@@ -62,7 +65,7 @@ public class TransacaoServiceImp implements TransacaoService {
     @Override
     public TransacaoDTO pagar(Transacao transacao) throws InsercaoNaoPermitidaException {
 
-        if(transacao.getDescricao().getStatus() == null && transacao.getDescricao().getNsu() == null && transacao.getDescricao().getCodigoAutorizacao() == null) {
+        if(transacao.getDescricao().getStatus() == null && transacao.getDescricao().getNsu() == null && transacao.getDescricao().getCodigoAutorizacao() == null && transacao.getId() == null && transacao.getDescricao().getId() == null && transacao.getFormaPagamento().getId() == null) {
             transacao.getDescricao().setNsu("1234567890");
             transacao.getDescricao().setCodigoAutorizacao("147258369");
             transacao.getDescricao().setStatus(StatusEnum.AUTORIZADO);
@@ -76,9 +79,12 @@ public class TransacaoServiceImp implements TransacaoService {
     public TransacaoDTO estornar(Long id) throws TransacaoInexistenteException {
 
         try{
+
             Transacao transacao = (Transacao) Mapper.convert(procurarPeloId(id), Transacao.class);
             transacao.getDescricao().setStatus(StatusEnum.NEGADO);
-            transacaoRepository.save(transacao);
+
+            descricaoRepository.save(transacao.getDescricao());
+
             return (TransacaoDTO) Mapper.convert(transacao, TransacaoDTO.class);
         }catch (TransacaoInexistenteException ex){
             throw new TransacaoInexistenteException();

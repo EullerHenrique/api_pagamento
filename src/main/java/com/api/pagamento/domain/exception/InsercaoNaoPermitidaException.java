@@ -10,7 +10,7 @@ public class InsercaoNaoPermitidaException extends Exception{
         ResponseErrorDTO rmDTO = new ResponseErrorDTO();
         rmDTO.setStatus(400);
         rmDTO.setError("Bad Request");
-        rmDTO.setMessage("O código de autorização, o nsu e o status não podem ser inseridos pelo usuário");
+        rmDTO.setMessage("O id, o código de autorização, o nsu e o status não podem ser inseridos pelo usuário");
         return rmDTO;
     }
 

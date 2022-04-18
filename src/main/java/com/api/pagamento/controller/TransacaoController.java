@@ -80,7 +80,7 @@ public class TransacaoController {
             @ApiResponse(code = 400, message = "Há campos obrigatórios que não foram preenchidos"),
             @ApiResponse(code = 500, message = "Internal Server Error")
     })
-    @PostMapping(value = "/pagamento", produces = "application/json", consumes = "application/json")
+    @PostMapping(value = "/pagamento")
     public ResponseEntity<TransacaoDTO> pagar(@RequestBody @Valid Transacao transacao) throws InsercaoNaoPermitidaException {
 
         return ResponseEntity.ok().body(transacaoService.pagar(transacao));

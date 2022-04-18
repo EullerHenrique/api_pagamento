@@ -7,6 +7,7 @@ import com.api.pagamento.domain.enumeration.StatusEnum;
 import com.api.pagamento.domain.exception.InsercaoNaoPermitidaException;
 import com.api.pagamento.domain.exception.TransacaoInexistenteException;
 import com.api.pagamento.domain.model.Transacao;
+import com.api.pagamento.repository.DescricaoRepository;
 import com.api.pagamento.repository.TransacaoRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -107,6 +108,10 @@ public class TransacaoServiceTest {
     @InjectMocks
     private TransacaoServiceImp transacaoService;
 
+    @Mock
+    private DescricaoRepository descricaoRepository;
+
+
     // @Test = A anotação de teste informa ao JUnit que o método void público ao qual está anexado pode ser executado
     // como um caso de teste . Para executar o método, JUnit primeiro constrói uma nova instância da classe e,
     // em seguida,  invoca o método anotado
@@ -125,12 +130,16 @@ public class TransacaoServiceTest {
             //Tranforma o TransacaoDTO em um Transacao
             Transacao transacao = (Transacao) Mapper.convert(expectedTransacaoDTO, Transacao.class);
 
+            transacao.setId(null);
+            transacao.getDescricao().setId(null);
+            transacao.getFormaPagamento().setId(null);
+
         //Quando
 
             //transacaoService.save( -> transacaoRepository.save(expectedTransacao) -> expectedTransacao
             when(transacaoRepository
                     .save(transacao))
-                    .thenReturn(transacao);
+                    .thenReturn((Transacao) Mapper.convert(expectedTransacaoDTO,Transacao.class));
 
         // Então
 
@@ -152,7 +161,7 @@ public class TransacaoServiceTest {
 
     // Quando o nsu, codigo_pagamento ou o status é informado, uma exceção deve ser lançada
     @Test
-    void whenNsuCodPagStatusInformedThenAnExceptionShouldBeThrown() {
+    void whenIdsNsuCodPagStatusInformedThenAnExceptionShouldBeThrown() {
 
         // Dado
 

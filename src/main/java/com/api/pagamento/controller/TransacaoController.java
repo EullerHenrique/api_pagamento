@@ -6,16 +6,16 @@ import com.api.pagamento.domain.exception.InsercaoNaoPermitidaException;
 import com.api.pagamento.domain.exception.TransacaoInexistenteException;
 import com.api.pagamento.domain.model.Transacao;
 import com.api.pagamento.service.TransacaoService;
-import com.google.gson.Gson;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.List;
+
 //@RestController: @Controller + @ResponseBody
 
 //@Controller
@@ -47,33 +47,57 @@ public class TransacaoController {
 
     //ResponseEntity vs ResponseStatus: https://www.youtube.com/watch?v=D1TiEm956WE
 
-    @GetMapping(value = "/{id}")
+    @ApiOperation(value = "Procura uma transação pelo id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "A transação foi encontrada"),
+            @ApiResponse(code = 404, message = "A transação com o id em questão não foi encontrada"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
+    @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<TransacaoDTO> procurarPeloId(@PathVariable Long id) throws TransacaoInexistenteException {
 
        return ResponseEntity.ok().body(transacaoService.procurarPeloId(id));
 
     }
 
-    @GetMapping()
+    @ApiOperation(value = "Procura todas as transações")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Pelo menos uma transação foi encontrada"),
+            @ApiResponse(code = 404, message = "Nenhuma transação foi encontrada"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
+    @GetMapping(produces = "application/json")
     public ResponseEntity<List<TransacaoDTO>> procurarTodos() throws TransacaoInexistenteException {
 
         return ResponseEntity.ok().body(transacaoService.procurarTodos());
 
     }
 
-    @PostMapping("/pagamento")
+    @ApiOperation(value = "Realiza um pagamento")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "O pagamento foi realizado"),
+            @ApiResponse(code = 404, message = "O código de autorização, o nsu e o status não podem ser inseridos pelo usuário"),
+            @ApiResponse(code = 400, message = "Há campos obrigatórios que não foram preenchidos"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
+    @PostMapping(value = "/pagamento", produces = "application/json", consumes = "application/json")
     public ResponseEntity<TransacaoDTO> pagar(@RequestBody @Valid Transacao transacao) throws InsercaoNaoPermitidaException {
 
         return ResponseEntity.ok().body(transacaoService.pagar(transacao));
 
     }
 
-
-    @GetMapping("/estorno/{id}")
+    @ApiOperation(value = "Solicita um estorno pelo id da transação")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "O estorno foi realizado"),
+            @ApiResponse(code = 404, message = "Nenhuma transação foi encontrada"),
+            @ApiResponse(code = 400, message = "Há campos obrigatórios que não foram preenchidos"),
+            @ApiResponse(code = 500, message = "Internal Server Error")
+    })
+    @PutMapping(value = "/estorno/{id}", produces = "application/json")
     public ResponseEntity<TransacaoDTO> estornar(@PathVariable Long id) throws TransacaoInexistenteException {
 
         return ResponseEntity.ok().body(transacaoService.estornar(id));
-
     }
 
     @ExceptionHandler(InsercaoNaoPermitidaException.class)

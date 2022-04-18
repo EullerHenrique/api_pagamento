@@ -11,5 +11,9 @@ services:
       - POSTGRES_PASSWORD=12345
     volumes:
       - db:/db
+    networks:
+      - postgres_network
 volumes:
   db: {}
+networks:
+  postgres_network: {}

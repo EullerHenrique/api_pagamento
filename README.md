@@ -16,7 +16,7 @@
 - Mockito
 - Hamcrest
 
-## Execução
+## Execução da API
 
   1. Clone o repósitorio e abra-o em uma IDE (Ex: Intellij)
   2. Instale o docker (https://www.docker.com/products/docker-desktop/)
@@ -25,6 +25,11 @@
   5. Navegue pela IDE até ApiPagamentoApplication 
   6. Aperte o botão play localizado ao lado de "public class ApiPagamentoApplication"
   7. Acesse o swagger (http://localhost:8080/swagger-ui/index.html) ou realize as requisições por meio do postman
+
+##Execução dos Testes
+
+  1. Navegue pela IDE até src/test/controller/TransacaoControllerTest e aperte o botão play localizado ao lado de public class TransacaoControllerTest 
+  2. Navegue pela IDE até sec/test/controller/TransacaoServiceTest e aperte o botão play localizado ao lado de public class TransacaoServiceTest 
 
 ## EndPoints
   

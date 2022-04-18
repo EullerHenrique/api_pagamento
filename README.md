@@ -125,7 +125,7 @@
         "cartao": "4444********1234",
         "descricao": {
             "valor": "500.50",
-            "dataHora": "01/05/2021 18",
+            "dataHora": "01/05/2021 18:00:00",
             "estabelecimento": "PetShop Mundo cão",
             "nsu": "1234567890",
             "codigoAutorizacao": "147258369",
@@ -141,7 +141,7 @@
         "cartao": "4444********1234",
         "descricao": {
             "valor": "500.50",
-            "dataHora": "01/05/2021 18",
+            "dataHora": "01/05/2021 18:00:00",
             "estabelecimento": "PetShop Mundo cão",
             "nsu": "1234567890",
             "codigoAutorizacao": "147258369",

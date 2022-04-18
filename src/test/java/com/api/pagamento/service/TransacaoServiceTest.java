@@ -24,6 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.when;
 
 /*
@@ -187,7 +188,7 @@ public class TransacaoServiceTest {
 
         //Quando
 
-        //transacaoRepository.procurarPeloId(expectedTransacao) -> ConstraintViolationException
+        //transacaoRepository.procurarPeloId(id) -> TransacaoInexistenteException
 
         // Então
 
@@ -214,7 +215,7 @@ public class TransacaoServiceTest {
 
         //Quando
 
-            //transacaoRepository.save(transacao) -> ConstraintViolationException
+        //transacaoRepository.save(transacao) -> ConstraintViolationException
             when(transacaoRepository.save(transacao))
                    .thenThrow(ConstraintViolationException.class);
 

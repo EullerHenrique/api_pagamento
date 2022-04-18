@@ -185,10 +185,6 @@ public class TransacaoControllerTest {
         //Gera um BeerDTO
         TransacaoDTO transacaoDTO = TransacaoDTOBuilder.builder().build().toTransacaoDTO();
 
-        //transacaoDTO.getDescricao().setNsu("1234567890");
-        //transacaoDTO.getDescricao().setCodigoAutorizacao("147258369");
-        //transacaoDTO.getDescricao().setStatus(StatusEnum.AUTORIZADO);
-
         //Tranforma o TransacaoDTO em um Transacao
         Transacao transacao = (Transacao) Mapper.convert(transacaoDTO, Transacao.class);
 
@@ -198,11 +194,12 @@ public class TransacaoControllerTest {
 
         //When
 
-        //transacao for inválido
+        //transacao for inválida
 
-        //transacaoService.pagar(transacao) -> InsercaoNaoPermitidaException()
-        when(transacaoService.pagar(transacao))
-                .thenThrow(InsercaoNaoPermitidaException.class);
+        transacao.getDescricao().setNsu("1234567890");
+        transacao.getDescricao().setCodigoAutorizacao("147258369");
+        transacao.getDescricao().setStatus(StatusEnum.AUTORIZADO);
+
 
         // Então
 

@@ -21,4 +21,5 @@
   4. Execute o comando docker-compose up -d ou aperte o botão play localizado ao lado do campo services
   5. Navegue pela IDE até ApiPagamentoApplication 
   6. Aperte o botão play localizado ao lado de "public class ApiPagamentoApplication"
+  7. Acesse o swagger (http://localhost:8080/swagger-ui/index.html) ou realize as requisições por meio do postman
   
